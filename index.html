@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Websocket Test</title>Copy of anno version 1.17.1
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+//      var socket = io.connect('http://localhost:8183/?token' + localStorage.getItem('access_token'));
+      var socket = io();
+
+      function clickBtn() {
+        socket.emit('chat', document.querySelector('#thisInput').value);
+      }
+
+      // 接收事件
+      socket.on('message', function (data) {
+        document.querySelector('#received').innerHTML = data;
+      });
+
+      function clickBtn1() {
+        socket.emit('mainPage');
+      }
+
+      function clickBtn2() {
+        socket.emit('chatPage');
+      }
+    </script>
+</head>
+<body>
+<input type="text" id="thisInput">
+<button onclick="clickBtn()">點我</button>
+<button onclick="clickBtn1()">room1</button>
+<button onclick="clickBtn2()">room2</button>
+<div id="received"></div>
+</body>
+</html>
